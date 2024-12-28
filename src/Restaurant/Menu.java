@@ -15,7 +15,6 @@ public class Menu {
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(query);
 
-        // Print header
         System.out.printf("%-10s | %-25s | %-10s%n", "Id", "Name", "Price");
         System.out.println("--------------------------------------------------");
 
@@ -24,7 +23,6 @@ public class Menu {
             String name = rs.getString("name");
             int price = rs.getInt("price");
 
-            // Print each row in a formatted way
             System.out.printf("%-10d | %-25s | %-10d%n", itemId, name, price);
         }
 

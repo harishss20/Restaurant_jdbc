@@ -8,6 +8,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         TableReg table = new TableReg();
         Menu menu = new Menu();
+        FoodOrder FO= new FoodOrder();
 
         try {
             int choice;
@@ -15,7 +16,7 @@ public class Main {
                 System.out.println("\nMenu:");
                 System.out.println("1. Show Tables");
                 System.out.println("2. Select Table");
-                System.out.println("2. Show Menu");
+                System.out.println("3. Show Menu");
                 System.out.println("8. Exit");
                 System.out.println();
 
@@ -33,6 +34,7 @@ public class Main {
 
                     case 3:
                         menu.showMenu();
+                        FO.orderFood();
                         break;
                     case 8:
                         System.out.println("Exiting the application. Goodbye!");
