@@ -17,6 +17,7 @@ public class Main {
                 System.out.println("1. Show Tables");
                 System.out.println("2. Select Table");
                 System.out.println("3. Show Menu");
+                System.out.println("4. Show orders");
                 System.out.println("8. Exit");
                 System.out.println();
 
@@ -36,6 +37,11 @@ public class Main {
                         menu.showMenu();
                         FO.orderFood();
                         break;
+
+                    case 4:
+                        FO.showTableOrders();
+                        break;
+
                     case 8:
                         System.out.println("Exiting the application. Goodbye!");
                         break;

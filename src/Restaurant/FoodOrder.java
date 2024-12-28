@@ -35,4 +35,40 @@ public class FoodOrder {
         }
     }
 
+    public void showTableOrders() throws SQLException {
+        System.out.println("Enter your table Number:");
+        int tb = sc.nextInt();
+
+
+        String query = "SELECT * FROM order_items WHERE table_id = ?";
+
+        Connection con = dbCon.getConnection();
+        PreparedStatement st = con.prepareStatement(query);
+        st.setInt(1, tb);
+
+        ResultSet rs = st.executeQuery();
+
+
+        if (!rs.next()) {
+            System.out.println("The table number is wrong. Please, try again!");
+            return;
+        }
+
+        System.out.printf("%-15s | %-15s | %-15s%n", "Table Number", "Item_id", "Quantity");
+        System.out.println("------------------------------------");
+
+
+        do {
+            int tb_number = rs.getInt("table_id");
+            int itemId = rs.getInt("item_id");
+            int quantity = rs.getInt("quantity");
+
+
+            System.out.printf("%-15d | %-15d | %-15d%n", tb_number, itemId, quantity);
+        } while (rs.next());
+
+        System.out.println("------------------------------------");
+    }
+
+
 }

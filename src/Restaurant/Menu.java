@@ -26,10 +26,8 @@ public class Menu {
             System.out.printf("%-10d | %-25s | %-10d%n", itemId, name, price);
         }
 
-
         rs.close();
         st.close();
         con.close();
     }
-
 }
