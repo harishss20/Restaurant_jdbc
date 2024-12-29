@@ -1,7 +1,4 @@
-<p align="center">
-    
-</p>
-<p align="center"><h1 align="center">RESTAURANT_JDBC</h1></p>
+# 🏨 Restaurant JDBC Project
 
 <p align="center">
 	<img src="https://img.shields.io/github/license/harishss20/Restaurant_jdbc?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
@@ -9,16 +6,12 @@
 	<img src="https://img.shields.io/github/languages/top/harishss20/Restaurant_jdbc?style=default&color=0080ff" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/harishss20/Restaurant_jdbc?style=default&color=0080ff" alt="repo-language-count">
 </p>
-<p align="center"><!-- default option, no dependency badges. -->
-</p>
-<p align="center">
-	<!-- default option, no dependency badges. -->
-</p>
-<br>
 
+## 📖 Project Description
 
+The `Restaurant_JDBC` project is a Java-based application for managing restaurant operations. It leverages JDBC for database connectivity and allows functionalities like menu management, table registration, and order processing. This project demonstrates core Java skills, SQL integration, and object-oriented design principles.
 
-
+---
 
 ## 📁 Project Structure
 
@@ -29,18 +22,10 @@
         └── Restaurant
 ```
 
-
 ### 📂 Project Index
 <details open>
 	<summary><b><code>RESTAURANT_JDBC/</code></b></summary>
-	<details> <!-- __root__ Submodule -->
-		<summary><b>__root__</b></summary>
-		<blockquote>
-			<table>
-			</table>
-		</blockquote>
-	</details>
-	<details> <!-- src Submodule -->
+	<details>
 		<summary><b>src</b></summary>
 		<blockquote>
 			<details>
@@ -49,23 +34,23 @@
 					<table>
 					<tr>
 						<td><b><a href='https://github.com/harishss20/Restaurant_jdbc/blob/master/src/Restaurant/FoodOrder.java'>FoodOrder.java</a></b></td>
-						<td><code>❯ REPLACE-ME</code></td>
+						<td>Manages food ordering functionality.</td>
 					</tr>
 					<tr>
 						<td><b><a href='https://github.com/harishss20/Restaurant_jdbc/blob/master/src/Restaurant/Menu.java'>Menu.java</a></b></td>
-						<td><code>❯ REPLACE-ME</code></td>
+						<td>Handles menu-related operations.</td>
 					</tr>
 					<tr>
 						<td><b><a href='https://github.com/harishss20/Restaurant_jdbc/blob/master/src/Restaurant/DatabaseCon.java'>DatabaseCon.java</a></b></td>
-						<td><code>❯ REPLACE-ME</code></td>
+						<td>Establishes database connection.</td>
 					</tr>
 					<tr>
 						<td><b><a href='https://github.com/harishss20/Restaurant_jdbc/blob/master/src/Restaurant/Main.java'>Main.java</a></b></td>
-						<td><code>❯ REPLACE-ME</code></td>
+						<td>Entry point of the application.</td>
 					</tr>
 					<tr>
 						<td><b><a href='https://github.com/harishss20/Restaurant_jdbc/blob/master/src/Restaurant/TableReg.java'>TableReg.java</a></b></td>
-						<td><code>❯ REPLACE-ME</code></td>
+						<td>Manages table registrations.</td>
 					</tr>
 					</table>
 				</blockquote>
@@ -75,22 +60,37 @@
 </details>
 
 ---
-## 🚀 Getting Started
+
+## 🛠 Technologies Used
+
+- **Java**: Core programming language.
+- **JDBC**: For database connectivity.
+- **MySQL**: Backend database.
+- **Git**: Version control.
+
+---
+
+## ✨ Features
+
+- **Table Management**: Add and manage restaurant tables.
+- **Menu Management**: View and update menu items.
+- **Order Management**: Place and track customer orders.
+- **Dynamic Pricing**: Calculate order totals based on the menu.
+- **Database Integration**: Robust backend powered by MySQL.
+
+---
+
+## 🏃‍♂️ Usage Instructions
 
 ### ☑️ Prerequisites
 
-Before getting started with Restaurant_jdbc, ensure your runtime environment meets the following requirements:
-
-- **Programming Language:** Java
-
+- Install **Java** and ensure it’s added to your system PATH.
+- Set up **MySQL** and create a database.
+- Update database credentials in `DatabaseCon.java`.
 
 ### ⚙️ Installation
 
-Install Restaurant_jdbc using one of the following methods:
-
-**Build from source:**
-
-1. Clone the Restaurant_jdbc repository:
+1. Clone the `Restaurant_jdbc` repository:
 ```sh
 ❯ git clone https://github.com/harishss20/Restaurant_jdbc
 ```
@@ -100,7 +100,48 @@ Install Restaurant_jdbc using one of the following methods:
 ❯ cd Restaurant_jdbc
 ```
 
+3. Compile the project:
+```sh
+❯ javac -d bin src/Restaurant/*.java
+```
 
+4. Run the project:
+```sh
+❯ java -cp bin Restaurant.Main
+```
+
+### Application Navigation
+- Follow on-screen prompts to manage tables, view the menu, and place orders.
+
+---
+
+## 🗄 Database Schema
+
+### Tables
+- **`Tables`**: Manages restaurant tables.
+- **`Menu`**: Stores menu items and their details.
+- **`Order_Items`**: Tracks orders, including table number, items, and quantities.
+
+### Relationships
+- `Order_Items.table_id` → References `Tables.table_id`
+- `Order_Items.item_id` → References `Menu.item_id`
+
+---
+
+## 🧪 Testing
+
+This project was tested manually for:
+- Input validation.
+- Database consistency.
+- Error handling.
+
+---
+
+## 🚀 Future Improvements
+
+- **Web Interface**: Develop a web-based frontend for easier access.
+- **Mobile Integration**: Create a mobile app for real-time order management.
+- **Analytics Dashboard**: Add insights into sales and table occupancy.
 
 ---
 
@@ -110,11 +151,10 @@ Install Restaurant_jdbc using one of the following methods:
 - **🐛 [Report Issues](https://github.com/harishss20/Restaurant_jdbc/issues)**: Submit bugs found or log feature requests for the `Restaurant_jdbc` project.
 - **💡 [Submit Pull Requests](https://github.com/harishss20/Restaurant_jdbc/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
 
-<details closed>
-<summary>Contributing Guidelines</summary>
+### Contributing Guidelines
 
-1. **Fork the Repository**: Start by forking the project repository to your github account.
-2. **Clone Locally**: Clone the forked repository to your local machine using a git client.
+1. **Fork the Repository**: Start by forking the project repository to your GitHub account.
+2. **Clone Locally**: Clone the forked repository to your local machine using a Git client.
    ```sh
    git clone https://github.com/harishss20/Restaurant_jdbc
    ```
@@ -127,29 +167,27 @@ Install Restaurant_jdbc using one of the following methods:
    ```sh
    git commit -m 'Implemented new feature x.'
    ```
-6. **Push to github**: Push the changes to your forked repository.
+6. **Push to GitHub**: Push the changes to your forked repository.
    ```sh
    git push origin new-feature-x
    ```
 7. **Submit a Pull Request**: Create a PR against the original project repository. Clearly describe the changes and their motivations.
-8. **Review**: Once your PR is reviewed and approved, it will be merged into the main branch. Congratulations on your contribution!
-</details>
-
-<details closed>
-<summary>Contributor Graph</summary>
-<br>
-<p align="left">
-   <a href="https://github.com{/harishss20/Restaurant_jdbc/}graphs/contributors">
-      <img src="https://contrib.rocks/image?repo=harishss20/Restaurant_jdbc">
-   </a>
-</p>
-</details>
 
 ---
 
 ## 🎗 License
 
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is protected under the [MIT License](https://choosealicense.com/licenses/mit/). For more details, refer to the [LICENSE](https://choosealicense.com/licenses/mit/) file.
 
 ---
+
+## 📸 Screenshots
+
+### Menu View
+![Menu View](https://via.placeholder.com/600x400)
+
+### Place Order
+![Place Order](https://via.placeholder.com/600x400)
+
+
 
