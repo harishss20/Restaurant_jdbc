@@ -15,10 +15,10 @@ public class Main {
             do {
                 System.out.println("\nMenu:");
                 System.out.println("1. Show Tables");
-                System.out.println("2. Select Table");
-                System.out.println("3. Show Menu and order Food");
-                System.out.println("4. Show orders Table wise");
-                System.out.println("5. Show All Table orders");
+
+                System.out.println("2. Show Menu and order Food");
+                System.out.println("3. Show orders Table wise");
+                System.out.println("4. Show All Table orders");
                 System.out.println("8. Exit");
                 System.out.println();
 
@@ -31,19 +31,19 @@ public class Main {
                         table.showTable();
                         break;
                     case 2:
-                        table.selectTable();
-                        break;
-
-                    case 3:
                         menu.showMenu();
                         FO.orderFood();
                         break;
 
-                    case 4:
+                    case 3:
                         FO.showTableOrders();
                         break;
-                    case 5:
+
+                    case 4:
                         FO.showAllTables();
+                        break;
+                    case 5:
+
                         break;
                     case 8:
                         System.out.println("Thankyou. visit again!");

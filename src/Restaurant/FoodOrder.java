@@ -6,47 +6,64 @@ import java.util.*;
 public class FoodOrder {
 
     DatabaseCon dbCon = new DatabaseCon();
+    TableReg tb = new TableReg();
     Scanner sc = new Scanner(System.in);
 
     public void orderFood() throws SQLException {
-        String fetchQuery= "SELECT  price FROM menu WHERE item_id =?";
-        String insertOrderQuery ="INSERT INTO order_items (table_id, item_id, quantity,price ) values (?,?,?,?)";
+        String fetchQuery = "SELECT price FROM menu WHERE item_id = ?";
+        String insertOrderQuery = "INSERT INTO order_items (table_id, item_id, quantity, price) VALUES (?, ?, ?, ?)";
 
-        Connection con = dbCon.getConnection();
-        PreparedStatement fst = con.prepareStatement(fetchQuery);
-        PreparedStatement  st= con.prepareStatement(insertOrderQuery);
+        try (Connection con = dbCon.getConnection();
+             PreparedStatement fetchStmt = con.prepareStatement(fetchQuery);
+             PreparedStatement insertStmt = con.prepareStatement(insertOrderQuery)) {
 
-        System.out.print("Enter the Table Number: ");
-        int tableNumber= sc.nextInt();
+            System.out.print("Enter the Table Number: ");
+            int tableNumber = sc.nextInt();
 
-        System.out.print("How many items do you want to order ?");
-        int itemCount = sc.nextInt();
-
-        for(int i=0; i<itemCount; i++){
-            System.out.println("Enter item Id from menu: ");
-            int itemId = sc.nextInt();
-            System.out.println("Enter the Number of Quantity:");
-            int quantity = sc.nextInt();
-
-            fst.setInt(1,itemId);
-            ResultSet frs = fst.executeQuery();
-
-            if (frs.next()) {
-                double pricePerUnit = frs.getDouble("price");
-                double totalPrice = pricePerUnit * quantity;
-
-
-                st.setInt(1, tableNumber);
-                st.setInt(2, itemId);
-                st.setInt(3, quantity);
-                st.setDouble(4, totalPrice);
-                st.addBatch();
-            } else {
-                System.out.println("Item ID " + itemId + " not found in the menu.");
+            boolean tb_status = tb.selectTable(tableNumber);
+            if (!tb_status) {
+                System.out.println("Table is not available or already selected.");
+                return;
             }
+
+            System.out.print("How many items do you want to order: ");
+            int itemCount = sc.nextInt();
+
+            for (int i = 0; i < itemCount; i++) {
+                System.out.print("Enter item ID from menu: ");
+                int itemId = sc.nextInt();
+
+                System.out.print("Enter the quantity: ");
+                int quantity = sc.nextInt();
+
+                if (quantity <= 0) {
+                    System.out.println("Invalid quantity. Please try again.");
+                    continue;
+                }
+
+                fetchStmt.setInt(1, itemId);
+                try (ResultSet rs = fetchStmt.executeQuery()) {
+                    if (rs.next()) {
+                        double pricePerUnit = rs.getDouble("price");
+                        double totalPrice = pricePerUnit * quantity;
+
+                        insertStmt.setInt(1, tableNumber);
+                        insertStmt.setInt(2, itemId);
+                        insertStmt.setInt(3, quantity);
+                        insertStmt.setDouble(4, totalPrice);
+                        insertStmt.addBatch();
+                    } else {
+                        System.out.println("Item ID " + itemId + " not found in the menu.");
+                    }
+                }
+            }
+
+            int[] results = insertStmt.executeBatch();
+            System.out.println(results.length + " items successfully added to the order.");
+        } catch (SQLException e) {
+            System.out.println("Error during order placement: " + e.getMessage());
+            throw e;
         }
-        int[] result = st.executeBatch();
-        System.out.println(result.length + " items successfully added to the order.");
     }
 
     public void showAllTables() throws SQLException{

@@ -30,29 +30,42 @@ public class TableReg {
         System.out.println("------------------------------------");
     }
 
-    public void selectTable() throws SQLException{
-        System.out.println("Enter table number to select:");
-        tableNumber = sc.nextInt();
+    public boolean selectTable(int tb) throws SQLException{
+
+
         String query ="UPDATE Tables SET table_status=0 WHERE table_id= ? AND table_status=1 ";
         Connection con= dbcon.getConnection();
         PreparedStatement pst = null;
         pst = con.prepareStatement(query);
-        pst.setInt(1,tableNumber);
+        pst.setInt(1,tb);
 
         int rowAffected = pst.executeUpdate();
 
         if(rowAffected >0){
-            System.out.println("table" + tableNumber + "is selected successfully");
+            return true;
         }
         else{
-            System.out.println("table" +tableNumber + "is not available or already selected."  );
+            return false;
         }
 
+    }
+    public boolean deselectTable(int tb) throws SQLException{
 
+        String query ="UPDATE Tables SET table_status=1 WHERE table_id= ? AND table_status=0 ";
+        Connection con= dbcon.getConnection();
+        PreparedStatement pst = null;
+        pst = con.prepareStatement(query);
+        pst.setInt(1,tb);
 
+        int rowAffected = pst.executeUpdate();
 
+        if(rowAffected >0){
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
-
 
 }
