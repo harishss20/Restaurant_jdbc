@@ -145,49 +145,13 @@ This project was tested manually for:
 
 ---
 
-## 🔰 Contributing
 
-- **💬 [Join the Discussions](https://github.com/harishss20/Restaurant_jdbc/discussions)**: Share your insights, provide feedback, or ask questions.
-- **🐛 [Report Issues](https://github.com/harishss20/Restaurant_jdbc/issues)**: Submit bugs found or log feature requests for the `Restaurant_jdbc` project.
-- **💡 [Submit Pull Requests](https://github.com/harishss20/Restaurant_jdbc/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
-
-### Contributing Guidelines
-
-1. **Fork the Repository**: Start by forking the project repository to your GitHub account.
-2. **Clone Locally**: Clone the forked repository to your local machine using a Git client.
-   ```sh
-   git clone https://github.com/harishss20/Restaurant_jdbc
-   ```
-3. **Create a New Branch**: Always work on a new branch, giving it a descriptive name.
-   ```sh
-   git checkout -b new-feature-x
-   ```
-4. **Make Your Changes**: Develop and test your changes locally.
-5. **Commit Your Changes**: Commit with a clear message describing your updates.
-   ```sh
-   git commit -m 'Implemented new feature x.'
-   ```
-6. **Push to GitHub**: Push the changes to your forked repository.
-   ```sh
-   git push origin new-feature-x
-   ```
-7. **Submit a Pull Request**: Create a PR against the original project repository. Clearly describe the changes and their motivations.
-
----
 
 ## 🎗 License
 
 This project is protected under the [MIT License](https://choosealicense.com/licenses/mit/). For more details, refer to the [LICENSE](https://choosealicense.com/licenses/mit/) file.
 
 ---
-
-## 📸 Screenshots
-
-### Menu View
-![Menu View](https://via.placeholder.com/600x400)
-
-### Place Order
-![Place Order](https://via.placeholder.com/600x400)
 
 
 
