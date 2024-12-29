@@ -124,5 +124,50 @@ public class FoodOrder {
         System.out.println("------------------------------------------------------------------");
     }
 
+    public void clearBillOrders(int tb) throws SQLException {
+        String query = "DELETE FROM order_items WHERE table_id=?";
+        Connection con = dbCon.getConnection();
+        PreparedStatement st= con.prepareStatement(query);
+        st.setInt(1,tb);
+        st.executeUpdate();
+
+
+
+    }
+
+    public void bill() throws SQLException {
+        System.out.println("To Generate bill Enter your Table Number: ");
+        int tableNumber = sc.nextInt();
+        String query = "SELECT * FROM order_items WHERE table_id=?";
+        Connection con = dbCon.getConnection();
+        PreparedStatement  st = con.prepareStatement(query);
+        st.setInt(1, tableNumber);
+        ResultSet rs= st.executeQuery();
+        if (!rs.next()) {
+            System.out.println("The table number is wrong. Please, try again!");
+            return;
+        }
+        System.out.printf("%-15s | %-15s | %-15s | %-15s%n", "Table Number", "Item_id", "Quantity", "price");
+        System.out.println("------------------------------------------------------------------");
+
+        double TotalPrice = 0;
+        do {
+            int tb_number = rs.getInt("table_id");
+            int itemId = rs.getInt("item_id");
+            int quantity = rs.getInt("quantity");
+            double price = rs.getDouble("price");
+            TotalPrice +=price;
+
+
+            System.out.printf("%-15d | %-15d | %-15d| %-15f%n", tb_number, itemId, quantity,price);
+        } while (rs.next());
+        System.out.println("Total Price:" + TotalPrice);
+        System.out.println("------------------------------------------------------------------");
+        clearBillOrders(tableNumber);
+        tb.deselectTable(tableNumber);
+
+    }
+
+
 
 }
