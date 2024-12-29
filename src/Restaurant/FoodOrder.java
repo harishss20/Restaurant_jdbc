@@ -9,10 +9,11 @@ public class FoodOrder {
     Scanner sc = new Scanner(System.in);
 
     public void orderFood() throws SQLException {
-        String fetchQuery= "SELECT name, category, price FROM menu WHERE item_id =?";
-        String insertOrderQuery ="INSERT INTO order_items (table_id, item_id, quantity) values (?,?,?)";
+        String fetchQuery= "SELECT  price FROM menu WHERE item_id =?";
+        String insertOrderQuery ="INSERT INTO order_items (table_id, item_id, quantity,price ) values (?,?,?,?)";
 
         Connection con = dbCon.getConnection();
+        PreparedStatement fst = con.prepareStatement(fetchQuery);
         PreparedStatement  st= con.prepareStatement(insertOrderQuery);
 
         System.out.print("Enter the Table Number: ");
@@ -27,12 +28,25 @@ public class FoodOrder {
             System.out.println("Enter the Number of Quantity:");
             int quantity = sc.nextInt();
 
-            st.setInt(1,tableNumber);
-            st.setInt(2,itemId);
-            st.setInt(3,quantity);
-            st.addBatch();
-            st.executeBatch();
+            fst.setInt(1,itemId);
+            ResultSet frs = fst.executeQuery();
+
+            if (frs.next()) {
+                double pricePerUnit = frs.getDouble("price");
+                double totalPrice = pricePerUnit * quantity;
+
+
+                st.setInt(1, tableNumber);
+                st.setInt(2, itemId);
+                st.setInt(3, quantity);
+                st.setDouble(4, totalPrice);
+                st.addBatch();
+            } else {
+                System.out.println("Item ID " + itemId + " not found in the menu.");
+            }
         }
+        int[] result = st.executeBatch();
+        System.out.println(result.length + " items successfully added to the order.");
     }
 
     public void showAllTables() throws SQLException{
@@ -41,20 +55,21 @@ public class FoodOrder {
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(query);
 
-        System.out.printf("%-15s | %-15s | %-15s%n", "Table Number", "Item_id", "Quantity");
-        System.out.println("------------------------------------");
+        System.out.printf("%-15s | %-15s | %-15s | %-15s%n", "Table Number", "Item_id", "Quantity", "price");
+        System.out.println("-----------------------------------------------------------------");
 
 
         while (rs.next()) {
             int tb_number = rs.getInt("table_id");
             int itemId = rs.getInt("item_id");
             int quantity = rs.getInt("quantity");
+            double price = rs.getDouble("price");
 
-            // Print row data
-            System.out.printf("%-15d | %-15d | %-15d%n", tb_number, itemId, quantity);
+
+            System.out.printf("%-15d | %-15d | %-15d| %-152f%n", tb_number, itemId, quantity,price);
         }
 
-        System.out.println("------------------------------------");
+        System.out.println("-----------------------------------------------------------------");
     }
 
     public void showTableOrders() throws SQLException {
@@ -75,20 +90,21 @@ public class FoodOrder {
             return;
         }
 
-        System.out.printf("%-15s | %-15s | %-15s%n", "Table Number", "Item_id", "Quantity");
-        System.out.println("------------------------------------");
+        System.out.printf("%-15s | %-15s | %-15s | %-15s%n", "Table Number", "Item_id", "Quantity", "price");
+        System.out.println("------------------------------------------------------------------");
 
 
         do {
             int tb_number = rs.getInt("table_id");
             int itemId = rs.getInt("item_id");
             int quantity = rs.getInt("quantity");
+            double price = rs.getDouble("price");
 
 
-            System.out.printf("%-15d | %-15d | %-15d%n", tb_number, itemId, quantity);
+            System.out.printf("%-15d | %-15d | %-15d| %-15f%n", tb_number, itemId, quantity,price);
         } while (rs.next());
 
-        System.out.println("------------------------------------");
+        System.out.println("------------------------------------------------------------------");
     }
 
 
